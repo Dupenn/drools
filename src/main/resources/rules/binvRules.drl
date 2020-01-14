@@ -1,4 +1,4 @@
-package com.xu.drools;
+package rules;
 
 import code.dp.drools.cdss.model.Binv1;
 import code.dp.drools.cdss.model.Binv2;
