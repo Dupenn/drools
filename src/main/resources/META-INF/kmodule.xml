@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
+    <kbase name="binv" packages="rules.cdss">
+        <ksession name="cdss-binv"/>
+    </kbase>
+
+
+
+
+    <kbase name="test" packages="rules">
+        <ksession name="ksession-test" />
+    </kbase>
+</kmodule>

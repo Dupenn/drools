@@ -1,0 +1,18 @@
+package rules;
+
+import code.dp.drools.cdss.model.Inspect;
+
+rule "abc"
+    salience 100
+    no-loop
+    when
+        $p: Inspect(a<0,b==0,c>0,a> -10)
+    then
+        int index = $p.getA();
+        if(index < 0){
+            index--;
+            $p.setA(index);
+        }
+        update($p);
+        System.out.println("A:"+index);
+end

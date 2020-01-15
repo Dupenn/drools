@@ -3,6 +3,8 @@ package code.dp.drools.cdss;
 import code.dp.drools.DroolsApplicationTests;
 import code.dp.drools.cdss.model.*;
 import org.junit.jupiter.api.Test;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class BinvTest extends DroolsApplicationTests {
 
-    @Autowired
-    KieSession kieSession;
+//    public static Inspect inspect = new Inspect("t2", "n1", "m0");
+     private static KieServices kieServices = KieServices.Factory.get();
 
     @Test
     public void testBinv() {
         Binv1 binv1 = new Binv1("t2", "n1", "m0");
-        Binv1 binv121 = new Binv1("t2", "n1", "m1");
+        Binv1 binv121 = new Binv1("t2", "n1", "m0");
         Binv2 binv2 = new Binv2("乳房肿瘤切除术并腋窝外科分期（1类）", true);
         binv2.setCancerSize(3);
         binv2.setConserveStandard(true);
@@ -41,10 +43,11 @@ public class BinvTest extends DroolsApplicationTests {
 
         Binv11 binv11 = new Binv11();
         Binv15 binv15 = new Binv15();
-
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession("cdss-binv");
         kieSession.insert(binv1);
-//        kieSession.insert(binv121);
-//        kieSession.insert(binv2);
+        kieSession.insert(binv121);
+        kieSession.insert(binv2);
 //        kieSession.insert(binv3);
 //        kieSession.insert(binv4);
 //        kieSession.insert(binv5);
@@ -59,4 +62,15 @@ public class BinvTest extends DroolsApplicationTests {
         kieSession.fireAllRules();
         kieSession.dispose();
     }
+
+    @Test
+    public void testRules() {
+        Inspect inspect = new Inspect(-1, 0, 1);
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession("ksession-test");
+        kieSession.insert(inspect);
+        kieSession.fireAllRules();
+        kieSession.dispose();
+    }
+
 }
