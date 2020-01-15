@@ -16,9 +16,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Inspect implements Serializable {
-//    private String cT;
-//    private String cN;
-//    private String cM;
     private Integer a;
     private Integer b;
     private Integer c;

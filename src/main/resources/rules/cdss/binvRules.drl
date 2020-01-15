@@ -215,7 +215,7 @@ rule "PAGE4-06:全身辅助治疗： 表现良好的组织学类型"
         System.out.println("参见全身辅助治疗： 表现良好的组织学类型（BINV-10）");
 end
 
-rule "PAGE8-01:随访001"
+rule "PAGE5-01:随访001"
     salience 98
     no-loop
     when
@@ -225,7 +225,7 @@ rule "PAGE8-01:随访001"
         System.out.println("考虑辅助内分泌治疗±辅助化疗并曲妥珠单抗（2B类）（BINV-17）");
 end
 
-rule "PAGE8-02:随访002"
+rule "PAGE5-02:随访002"
     salience 98
     no-loop
     when
@@ -235,7 +235,7 @@ rule "PAGE8-02:随访002"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE8-03:随访003"
+rule "PAGE5-03:随访003"
     salience 98
     no-loop
     when
@@ -246,7 +246,7 @@ rule "PAGE8-03:随访003"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE8-04:随访004"
+rule "PAGE5-04:随访004"
     salience 98
     no-loop
     when
@@ -256,7 +256,7 @@ rule "PAGE8-04:随访004"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE8-05:随访005"
+rule "PAGE5-05:随访005"
     salience 98
     no-loop
     when

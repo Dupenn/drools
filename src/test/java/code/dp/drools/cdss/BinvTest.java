@@ -1,12 +1,13 @@
 package code.dp.drools.cdss;
 
-import code.dp.drools.DroolsApplicationTests;
 import code.dp.drools.cdss.model.*;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Author: Dupeng
@@ -14,10 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Date: 2020/1/13 9:27
  * @Description:
  */
-public class BinvTest extends DroolsApplicationTests {
+@Slf4j
+public class BinvTest
+//        extends DroolsApplicationTests
+{
 
-//    public static Inspect inspect = new Inspect("t2", "n1", "m0");
-     private static KieServices kieServices = KieServices.Factory.get();
+    private static KieServices kieServices = KieServices.Factory.get();
+    private static KieContainer kieContainer = kieServices.newKieClasspathContainer();
 
     @Test
     public void testBinv() {
@@ -43,34 +47,47 @@ public class BinvTest extends DroolsApplicationTests {
 
         Binv11 binv11 = new Binv11();
         Binv15 binv15 = new Binv15();
-        KieContainer kieContainer = kieServices.newKieClasspathContainer();
         KieSession kieSession = kieContainer.newKieSession("cdss-binv");
         kieSession.insert(binv1);
-        kieSession.insert(binv121);
         kieSession.insert(binv2);
-//        kieSession.insert(binv3);
-//        kieSession.insert(binv4);
-//        kieSession.insert(binv5);
-//        kieSession.insert(binv6);
-//        kieSession.insert(binv7);
-//        kieSession.insert(binv8);
-//        kieSession.insert(binv9);
-//        kieSession.insert(binv10);
-//        kieSession.insert(binv11);
-//        kieSession.insert(binv15);
+        kieSession.insert(binv3);
+        kieSession.insert(binv4);
+        kieSession.insert(binv5);
+        kieSession.insert(binv6);
+        kieSession.insert(binv7);
+        kieSession.insert(binv8);
+        kieSession.insert(binv9);
+        kieSession.insert(binv10);
+        kieSession.insert(binv11);
+        kieSession.insert(binv15);
 
         kieSession.fireAllRules();
         kieSession.dispose();
     }
 
     @Test
+    @Disabled
     public void testRules() {
         Inspect inspect = new Inspect(-1, 0, 1);
-        KieContainer kieContainer = kieServices.newKieClasspathContainer();
         KieSession kieSession = kieContainer.newKieSession("ksession-test");
         kieSession.insert(inspect);
         kieSession.fireAllRules();
         kieSession.dispose();
+    }
+
+    @Test
+    public void testPatient() {
+        KieSession kieSession = kieContainer.newKieSession("rules-patient");
+//        kieSession.insert(new Patient().setCT("T1").setCN("N0").setCM("M0"));
+        kieSession.insert(new Patient().setCT("T2").setCN("N0").setCM("M0"));
+//        kieSession.insert(new Patient().setCT("T3").setCN("N2").setCM("M0"));
+        kieSession.fireAllRules();
+        kieSession.dispose();
+    }
+
+    @AfterAll
+    public static void cleanUp() {
+        kieContainer.dispose();
     }
 
 }

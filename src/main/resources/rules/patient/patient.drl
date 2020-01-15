@@ -1,0 +1,340 @@
+package rules.patient;
+
+import code.dp.drools.cdss.model.Patient;
+
+rule "PAGE1-01:局域治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT memberOf "T1,T2,T3", cN memberOf "N0,N1", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage2(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见局域治疗（BINV-2）");
+end
+
+rule "PAGE1-02:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T0", cN == "N1", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-03:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T1", cN == "N1", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-04:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T2", cN == "N0", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-05:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T2", cN == "N1", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-06:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T3", cN == "N0", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-07:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T3", cN == "N0", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-08:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T3", cN == "N1", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-09:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT memberOf "T0,T1,T2,T3", cN == "N2", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-10:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT == "T4", cN memberOf "N0,N1,N2", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+rule "PAGE1-11:考虑术前全身治疗"
+    salience 100
+    no-loop
+    when
+        Patient(cT memberOf "T0,T1,T2,T3,T4,Tis", cN == "N3", cM == "M0")
+        $p: Patient()
+    then
+        $p.setToPage11(true);
+        $p.setToPage15(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+end
+
+//
+//rule "PAGE2-01:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结>=4）"
+//    salience 99
+//    no-loop
+//    when
+//        Binv2(surgeryName == "乳房肿瘤切除术并腋窝外科分期（1类）", positiveAxillaryLymphNodes>=4, negativeAxillaryLymph == false, fromPage1 == true)
+//        $b4: Binv4()
+//    then
+//        $b4.setFromPage2(true);
+//        update($b4);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）、锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位（1类）推量照射。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
+//end
+//
+//rule "PAGE2-02:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结1-3）"
+//    salience 99
+//    no-loop
+//    when
+//        Binv2(surgeryName == "乳房肿瘤切除术并腋窝外科分期（1类）", positiveAxillaryLymphNodes>0, positiveAxillaryLymphNodes<3, negativeAxillaryLymph == false, fromPage1 == true)
+//        $b4: Binv4()
+//    then
+//        $b4.setFromPage2(true);
+//        update($b4);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）推量照射。积极考虑对锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位放疗。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
+//end
+//
+//rule "PAGE2-03:乳房肿瘤切除术并腋窝外科分期（阴性腋窝淋巴结）"
+//    salience 99
+//    no-loop
+//    when
+//        Binv2(surgeryName == "乳房肿瘤切除术并腋窝外科分期（1类）", positiveAxillaryLymphNodes == 0, negativeAxillaryLymph == true, fromPage1 == true)
+//        $b4: Binv4()
+//    then
+//        $b4.setFromPage2(true);
+//        update($b4);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）推量照射。并考虑对肿瘤位于中央/内侧或是肿瘤>2cm且伴有其他高危特征（年轻或广泛淋巴脉管浸润[LVI]）的患者行区域淋巴放疗。或考虑对部分低危患者行加速部分乳房照射（APBI）。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
+//end
+//
+//rule "PAGE2-04:全乳切除并外科腋窝分期（1类）±乳房重建"
+//    salience 99
+//    no-loop
+//    when
+//        Binv2(surgeryName == "全乳切除并外科腋窝分期（1类）±乳房重建", fromPage1 == true)
+//        $b3: Binv3()
+//    then
+//        $b3.setFromPage2(true);
+//        update($b3);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“区域治疗”（BINV-3）");
+//end
+//
+//rule "PAGE2-05:保乳治疗"
+//    salience 99
+//    no-loop
+//    when
+//        Binv1(cT memberOf "t2,t3")
+//        Binv2(fromPage1 == true, surgeryName == "保乳治疗", conserveStandard == true, cancerSize < 5)
+//        $b11: Binv11()
+//    then
+//        $b11.setFromPage2(true);
+//        update($b11);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑术前全身治疗指南。（binv-11)");
+//end
+//
+//rule "PAGE4-01:全身辅助治疗： 激素受体阳性-HER2阳性疾病"
+//    salience 98
+//    no-loop
+//    when
+//        $b5: Binv5()
+//        Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1,pr!=1, her2 == 1)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", pr == 1,er!=1, her2 == 1)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1, pr == 1, her2 == 1)
+//    then
+//        $b5.setFromPage4(true);
+//        update($b5);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阳性-HER2阳性疾病（BINV-5）");
+//end
+//
+//rule "PAGE4-02:全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病"
+//    salience 98
+//    no-loop
+//    when
+//        $b6: Binv6()
+//        Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1,pr!=1, her2 == 0)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", pr == 1,er!=1, her2 == 0)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1, pr == 1, her2 == 0)
+//    then
+//        $b6.setFromPage4(true);
+//        update($b6);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病（BINV-6）");
+//end
+//
+//rule "PAGE4-03:全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病"
+//    salience 98
+//    no-loop
+//    when
+//        $b7: Binv7()
+//        Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1, her2 == 0)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", pr == 1, her2 == 0)
+//        or Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 1, pr == 1, her2 == 0)
+//    then
+//        $b7.setFromPage4(true);
+//        update($b7);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病（BINV-7）");
+//end
+//
+//rule "PAGE4-04:全身辅助治疗： 激素受体阴性-HER2阳性疾病"
+//    salience 98
+//    no-loop
+//    when
+//        $b8: Binv8()
+//        Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 0, pr == 0, her2 == 1)
+//    then
+//        $b8.setFromPage4(true);
+//        update($b8);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 激素受体阴性-HER2阳性疾病（BINV-8）");
+//end
+//
+//rule "PAGE4-05:全身辅助治疗： 激素受体阴性-HER2阴性疾病"
+//    salience 98
+//    no-loop
+//    when
+//        $a:Binv4()
+//        Binv4(fromPage2 == true, histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌", er == 0, pr == 0, her2 == 0)
+//        $b9: Binv9()
+//    then
+//        $b9.setFromPage4(true);
+//        update($b9);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阴性-HER2阴性疾病（BINV-9）");
+//end
+//
+//rule "PAGE4-06:全身辅助治疗： 表现良好的组织学类型"
+//    salience 98
+//    no-loop
+//    when
+//        $b10: Binv10()
+//        Binv4(fromPage2 == true, histologyType memberOf "小管癌,黏液癌", er == 1, pr == 1)
+//        or Binv4(fromPage2 == true, histologyType memberOf "小管癌,黏液癌", er == 1)
+//        or Binv4(fromPage2 == true, histologyType memberOf "小管癌,黏液癌", pr == 1)
+//        or Binv4(fromPage2 == true, histologyType memberOf "小管癌,黏液癌", er == 0, pr == 0)
+//    then
+//        $b10.setFromPage4(true);
+//        update($b10);
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 表现良好的组织学类型（BINV-10）");
+//end
+//
+//rule "PAGE5-01:随访001"
+//    salience 98
+//    no-loop
+//    when
+//        Binv4(histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌")
+//        Binv5(fromPage4 == true, primaryTumorStage memberOf "pt1,pt2,pt3", regionalLymphNodesStage == "pn0", lymphaticMetastasis == 0, primaryTumorSize<=0.5)
+//    then
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助内分泌治疗±辅助化疗并曲妥珠单抗（2B类）（BINV-17）");
+//end
+//
+//rule "PAGE5-02:随访002"
+//    salience 98
+//    no-loop
+//    when
+//        Binv4(histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌")
+//        Binv5(fromPage4 == true, primaryTumorStage memberOf "pt1,pt2,pt3", regionalLymphNodesStage == "pn1mi", lymphaticMetastasis == 0, primaryTumorSize<=0.5)
+//    then
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
+//end
+//
+//rule "PAGE5-03:随访003"
+//    salience 98
+//    no-loop
+//    when
+//        Binv4(histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌")
+//        (Binv5(fromPage4 == true, primaryTumorStage memberOf "pt1,pt2,pt3", regionalLymphNodesStage == "pn1mi", lymphaticMetastasis == 0, primaryTumorSize<=0.5)
+//        or Binv5(fromPage4 == true, primaryTumorStage memberOf "pt1,pt2,pt3", regionalLymphNodesStage memberOf "pn0,pn1mi", lymphaticMetastasis == 0, primaryTumorSize<=1,primaryTumorSize>0.6))
+//    then
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
+//end
+//
+//rule "PAGE5-04:随访004"
+//    salience 98
+//    no-loop
+//    when
+//        Binv4(histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌")
+//        Binv5(fromPage4 == true, primaryTumorStage memberOf "pt1,pt2,pt3", regionalLymphNodesStage memberOf "pn0,pn1mi", lymphaticMetastasis == 0, primaryTumorSize>1)
+//    then
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
+//end
+//
+//rule "PAGE5-05:随访005"
+//    salience 98
+//    no-loop
+//    when
+//        Binv2(positiveAxillaryLymphNodes>0)
+//        Binv4(histologyType memberOf "导管癌,小叶癌,混合性癌,化生性癌")
+//    then
+//        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助化疗并曲妥珠单抗(1类)和内分泌治疗或辅助化疗并曲妥珠单抗+帕妥珠单抗和内分泌治疗（BINV-17）");
+//end

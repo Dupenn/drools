@@ -4,7 +4,9 @@
         <ksession name="cdss-binv"/>
     </kbase>
 
-
+    <kbase name="patient" packages="rules.patient">
+        <ksession name="rules-patient"/>
+    </kbase>
 
 
     <kbase name="test" packages="rules">
