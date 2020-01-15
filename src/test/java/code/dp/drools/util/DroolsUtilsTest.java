@@ -2,9 +2,6 @@ package code.dp.drools.util;
 
 import org.junit.jupiter.api.Test;
 import org.kie.api.runtime.KieSession;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author: Dupeng
@@ -13,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @Description:
  */
 class DroolsUtilsTest {
-
-    @Autowired
-    KieSession kieSession;
 
     @Test
     public void getKieSession() throws Exception {

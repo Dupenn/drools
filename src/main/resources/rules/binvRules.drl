@@ -13,7 +13,7 @@ import code.dp.drools.cdss.model.Binv10;
 import code.dp.drools.cdss.model.Binv11;
 import code.dp.drools.cdss.model.Binv15;
 
-rule "PAGE1:局域治疗"
+rule "PAGE1-01:局域治疗"
     salience 100
     no-loop
     when
@@ -31,7 +31,7 @@ rule "PAGE1:局域治疗"
         System.out.println("TNM->参见局域治疗（BINV-2）");
 end
 
-rule "PAGE1:可手术疾病的术前全身治疗"
+rule "PAGE1-02:可手术疾病的术前全身治疗"
     salience 100
     no-loop
     when
@@ -52,7 +52,7 @@ rule "PAGE1:可手术疾病的术前全身治疗"
         System.out.println("TNM->参见可手术疾病的术前全身治疗（BINV-11）");
 end
 
-rule "PAGE1:无法手术的或局部晚期疾病的术前全身治疗"
+rule "PAGE1-03:无法手术的或局部晚期疾病的术前全身治疗"
     salience 100
     no-loop
     when
@@ -72,7 +72,7 @@ rule "PAGE1:无法手术的或局部晚期疾病的术前全身治疗"
         System.out.println("TNM->参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
 end
 
-rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结>=4）"
+rule "PAGE2-01:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结>=4）"
     salience 99
     no-loop
     when
@@ -84,7 +84,7 @@ rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结>=
         System.out.println("全乳放疗伴或不伴瘤床（1类）、锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位（1类）推量照射。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
 end
 
-rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结1-3）"
+rule "PAGE2-02:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结1-3）"
     salience 99
     no-loop
     when
@@ -96,7 +96,7 @@ rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阳性腋窝淋巴结1-
         System.out.println("全乳放疗伴或不伴瘤床（1类）推量照射。积极考虑对锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位放疗。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
 end
 
-rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阴性腋窝淋巴结）"
+rule "PAGE2-03:乳房肿瘤切除术并腋窝外科分期（阴性腋窝淋巴结）"
     salience 99
     no-loop
     when
@@ -108,7 +108,7 @@ rule "PAGE2:乳房肿瘤切除术并腋窝外科分期（阴性腋窝淋巴结�
         System.out.println("全乳放疗伴或不伴瘤床（1类）推量照射。并考虑对肿瘤位于中央/内侧或是肿瘤>2cm且伴有其他高危特征（年轻或广泛淋巴脉管浸润[LVI]）的患者行区域淋巴放疗。或考虑对部分低危患者行加速部分乳房照射（APBI）。如果有化疗指征，放疗通常在化疗后进行。（参见binv4）");
 end
 
-rule "PAGE2:全乳切除并外科腋窝分期（1类）±乳房重建"
+rule "PAGE2-04:全乳切除并外科腋窝分期（1类）±乳房重建"
     salience 99
     no-loop
     when
@@ -120,7 +120,7 @@ rule "PAGE2:全乳切除并外科腋窝分期（1类）±乳房重建"
         System.out.println("参见“区域治疗”（BINV-3）");
 end
 
-rule "PAGE2:保乳治疗"
+rule "PAGE2-05:保乳治疗"
     salience 99
     no-loop
     when
@@ -133,7 +133,7 @@ rule "PAGE2:保乳治疗"
         System.out.println("考虑术前全身治疗指南。（binv-11)");
 end
 
-rule "PAGE3:全身辅助治疗： 激素受体阳性-HER2阳性疾病"
+rule "PAGE4-01:全身辅助治疗： 激素受体阳性-HER2阳性疾病"
     salience 98
     no-loop
     when
@@ -147,7 +147,7 @@ rule "PAGE3:全身辅助治疗： 激素受体阳性-HER2阳性疾病"
         System.out.println("参见全身辅助治疗：激素受体阳性-HER2阳性疾病（BINV-5）");
 end
 
-rule "PAGE3:全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病"
+rule "PAGE4-02:全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病"
     salience 98
     no-loop
     when
@@ -161,7 +161,7 @@ rule "PAGE3:全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性�
         System.out.println("参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病（BINV-6）");
 end
 
-rule "PAGE3:全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病"
+rule "PAGE4-03:全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病"
     salience 98
     no-loop
     when
@@ -175,7 +175,7 @@ rule "PAGE3:全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性�
         System.out.println("参见全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病（BINV-7）");
 end
 
-rule "PAGE3:全身辅助治疗： 激素受体阴性-HER2阳性疾病"
+rule "PAGE4-04:全身辅助治疗： 激素受体阴性-HER2阳性疾病"
     salience 98
     no-loop
     when
@@ -187,7 +187,7 @@ rule "PAGE3:全身辅助治疗： 激素受体阴性-HER2阳性疾病"
         System.out.println("参见全身辅助治疗： 激素受体阴性-HER2阳性疾病（BINV-8）");
 end
 
-rule "PAGE3:全身辅助治疗： 激素受体阴性-HER2阴性疾病"
+rule "PAGE4-05:全身辅助治疗： 激素受体阴性-HER2阴性疾病"
     salience 98
     no-loop
     when
@@ -200,7 +200,7 @@ rule "PAGE3:全身辅助治疗： 激素受体阴性-HER2阴性疾病"
         System.out.println("参见全身辅助治疗：激素受体阴性-HER2阴性疾病（BINV-9）");
 end
 
-rule "PAGE3:全身辅助治疗： 表现良好的组织学类型"
+rule "PAGE4-06:全身辅助治疗： 表现良好的组织学类型"
     salience 98
     no-loop
     when
@@ -215,7 +215,7 @@ rule "PAGE3:全身辅助治疗： 表现良好的组织学类型"
         System.out.println("参见全身辅助治疗： 表现良好的组织学类型（BINV-10）");
 end
 
-rule "PAGE4:随访001"
+rule "PAGE8-01:随访001"
     salience 98
     no-loop
     when
@@ -225,7 +225,7 @@ rule "PAGE4:随访001"
         System.out.println("考虑辅助内分泌治疗±辅助化疗并曲妥珠单抗（2B类）（BINV-17）");
 end
 
-rule "PAGE4:随访002"
+rule "PAGE8-02:随访002"
     salience 98
     no-loop
     when
@@ -235,7 +235,7 @@ rule "PAGE4:随访002"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE4:随访003"
+rule "PAGE8-03:随访003"
     salience 98
     no-loop
     when
@@ -246,7 +246,7 @@ rule "PAGE4:随访003"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE4:随访004"
+rule "PAGE8-04:随访004"
     salience 98
     no-loop
     when
@@ -256,7 +256,7 @@ rule "PAGE4:随访004"
         System.out.println("辅助内分泌治或辅助化疗并曲妥珠单抗和内分泌治疗（BINV-17）");
 end
 
-rule "PAGE4:随访005"
+rule "PAGE8-05:随访005"
     salience 98
     no-loop
     when
@@ -266,3 +266,7 @@ rule "PAGE4:随访005"
         System.out.println("辅助化疗并曲妥珠单抗(1类)和内分泌治疗或辅助化疗并曲妥珠单抗+帕妥珠单抗和内分泌治疗（BINV-17）");
 end
 
+//rule "PAGE18-01:局部区域复发的治疗"
+//    salience 97
+//    no-loop
+//    when

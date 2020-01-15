@@ -8,13 +8,17 @@ import java.io.Serializable;
 /**
  * @Author: Dupeng
  * @Email: dupeng@baiyyy.com.cn
- * @Date: 2020/1/9 12:52
+ * @Date: 2020/1/9 16:47
  * @Description:
  */
 @Data
 @NoArgsConstructor
-public class Inspect implements Serializable {
-    private String cT;
-    private String cN;
-    private String cM;
+public class Binv18 implements Serializable {
+    private Boolean fromPage8;
+
+    // 方案名称t
+    private String name;
+
+    // 临床分期
+    private String clinicalStage;
 }

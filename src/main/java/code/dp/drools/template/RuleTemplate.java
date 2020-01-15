@@ -53,7 +53,21 @@ public class RuleTemplate implements Serializable {
      */
     @Builder.Default
     private Boolean lockOnActive = false;
-    private String whenStr;
-    private String thenStr;
-    private String endStr = "end";
+
+    /**
+     * when：规则条件开始。条件可以单个，也可以多个，多个条件一次排列
+     * 如：当前规则只有在这三个条件都匹配的时候才会执行RHS部分
+     */
+    private String lhs;
+
+    /**
+     * 当规则条件满足，则进入规则结果部分执行，结果部分可以是纯java代码
+     */
+    private String rhs;
+
+    /**
+     * rule 结束字符
+     */
+    @Builder.Default
+    private String suffix = "end";
 }
