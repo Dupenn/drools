@@ -78,9 +78,9 @@ public class BinvTest
     @Test
     public void testPatient() {
         KieSession kieSession = kieContainer.newKieSession("rules-patient");
-//        kieSession.insert(new Patient().setCT("T1").setCN("N0").setCM("M0"));
-        kieSession.insert(new Patient().setCT("T2").setCN("N0").setCM("M0"));
-//        kieSession.insert(new Patient().setCT("T3").setCN("N2").setCM("M0"));
+//        kieSession.insert(new Patient("T1","N0","M0"));
+        kieSession.insert(new Patient("T2","N0","M0"));
+//        kieSession.insert(new Patient("T3","N2","M0"));
         kieSession.fireAllRules();
         kieSession.dispose();
     }
