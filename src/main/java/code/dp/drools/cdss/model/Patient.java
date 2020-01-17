@@ -573,4 +573,68 @@ public class Patient implements Serializable {
     public void setToPage27(Boolean toPage27) {
         this.toPage27 = toPage27;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "cT='" + cT + '\'' +
+                ", cN='" + cN + '\'' +
+                ", cM='" + cM + '\'' +
+                ", surgeryName='" + surgeryName + '\'' +
+                ", negativeAxillaryLymph=" + negativeAxillaryLymph +
+                ", positiveAxillaryLymphNodes=" + positiveAxillaryLymphNodes +
+                ", conserveStandard=" + conserveStandard +
+                ", cancerSize=" + cancerSize +
+                ", histologyType='" + histologyType + '\'' +
+                ", pr=" + pr +
+                ", er=" + er +
+                ", her2=" + her2 +
+                ", primaryTumorStage='" + primaryTumorStage + '\'' +
+                ", regionalLymphNodesStage='" + regionalLymphNodesStage + '\'' +
+                ", primaryTumorSize=" + primaryTumorSize +
+                ", lymphaticMetastasis=" + lymphaticMetastasis +
+                ", clinicalStage='" + clinicalStage + '\'' +
+                ", metastaticSites='" + metastaticSites + '\'' +
+                ", treatedOfThePastYear=" + treatedOfThePastYear +
+                ", frontLineStatus=" + frontLineStatus +
+                ", secondLineStatus=" + secondLineStatus +
+                ", thirdLineStatus=" + thirdLineStatus +
+                ", frontLineTreatEvaluation='" + frontLineTreatEvaluation + '\'' +
+                ", secondLineTreatEvaluation='" + secondLineTreatEvaluation + '\'' +
+                ", thirdLineTreatEvaluation='" + thirdLineTreatEvaluation + '\'' +
+                ", ecogPerformanceStatus=" + ecogPerformanceStatus +
+                ", frontLineToxicityOfTolerance='" + frontLineToxicityOfTolerance + '\'' +
+                ", secondLineToxicityOfTolerance='" + secondLineToxicityOfTolerance + '\'' +
+                ", treatmentName=" + treatmentName +
+                ", frontLineTreatUsed='" + frontLineTreatUsed + '\'' +
+                ", secondLineTreatUsed='" + secondLineTreatUsed + '\'' +
+                ", thirdLineTreatUsed='" + thirdLineTreatUsed + '\'' +
+                ", toPage2=" + toPage2 +
+                ", toPage3=" + toPage3 +
+                ", toPage4=" + toPage4 +
+                ", toPage5=" + toPage5 +
+                ", toPage6=" + toPage6 +
+                ", toPage7=" + toPage7 +
+                ", toPage8=" + toPage8 +
+                ", toPage9=" + toPage9 +
+                ", toPage10=" + toPage10 +
+                ", toPage11=" + toPage11 +
+                ", toPage12=" + toPage12 +
+                ", toPage13=" + toPage13 +
+                ", toPage14=" + toPage14 +
+                ", toPage15=" + toPage15 +
+                ", toPage16=" + toPage16 +
+                ", toPage17=" + toPage17 +
+                ", toPage18=" + toPage18 +
+                ", toPage19=" + toPage19 +
+                ", toPage20=" + toPage20 +
+                ", toPage21=" + toPage21 +
+                ", toPage22=" + toPage22 +
+                ", toPage23=" + toPage23 +
+                ", toPage24=" + toPage24 +
+                ", toPage25=" + toPage25 +
+                ", toPage26=" + toPage26 +
+                ", toPage27=" + toPage27 +
+                '}';
+    }
 }

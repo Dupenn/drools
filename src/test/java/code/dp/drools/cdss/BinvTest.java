@@ -30,14 +30,14 @@ public class BinvTest
         kieContainer.dispose();
     }
 
-    private static Patient initPatient() {
+    private static Patient fifthCase() {
 
         Patient p = new Patient("T1", "N0", "M0");
 
         // 判断[局域治疗（Page2）]所需参数
-        p.setSurgeryName("全乳切除并外科腋窝分期（1类）±乳房重建");
-//        p.setPositiveAxillaryLymphNodes(5);//阳性腋窝淋巴结
-        p.setNegativeAxillaryLymph(true);
+        p.setSurgeryName("乳房肿瘤切除术并外科腋窝分期(1类)");
+        p.setPositiveAxillaryLymphNodes(5);//阳性腋窝淋巴结
+//        p.setNegativeAxillaryLymph(true);
         p.setCancerSize(3);//乳房肿瘤大小
         p.setConserveStandard(true);//保乳标准
 
@@ -54,19 +54,21 @@ public class BinvTest
         p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
 
         //判断[复发/IV期（PAGE18）]所需参数
-//        p.setClinicalStage("复发");
+        p.setClinicalStage("复发");
 
         //判断[复发/IV期（M1）的全身治疗]所需参数
-//        p.setMetastaticSites("骨转移");
-//        p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
+        p.setMetastaticSites("肝转移");
+        p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
 
         //判断[复发/IV期（M1）的全身治疗:ER和/或PR阴性；HER2阳性]所需参数
-//        p.setFrontLineStatus(1);
-//        p.setFrontLineTreatEvaluation("疾病进展");
+        p.setFrontLineTreatEvaluation("疾病进展");
 //        p.setFrontLineToxicityOfTolerance("无法耐受");
+        p.setFrontLineStatus(1);
+        p.setSecondLineStatus(0);
+        p.setThirdLineStatus(0);
 
         //已用方案
-//        p.setFrontLineTreatUsed("");
+        p.setFrontLineTreatUsed("曲妥珠单抗+美坦新偶联物(T-DM1)");
 
         return p;
     }
@@ -133,7 +135,7 @@ public class BinvTest
 //                System.out.println(event);
             }
         });
-        Patient patient = initPatient();
+        Patient patient = fifthCase();
         kieSession.insert(patient);
         kieSession.fireAllRules();
         kieSession.dispose();
