@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieServices;
+import org.kie.api.event.rule.AfterMatchFiredEvent;
+import org.kie.api.event.rule.DefaultAgendaEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
@@ -22,6 +24,52 @@ public class BinvTest
 
     private static KieServices kieServices = KieServices.Factory.get();
     private static KieContainer kieContainer = kieServices.newKieClasspathContainer();
+
+    @AfterAll
+    public static void cleanUp() {
+        kieContainer.dispose();
+    }
+
+    private static Patient initPatient() {
+
+        Patient p = new Patient("T1", "N0", "M0");
+
+        // 判断[局域治疗（Page2）]所需参数
+        p.setSurgeryName("全乳切除并外科腋窝分期（1类）±乳房重建");
+//        p.setPositiveAxillaryLymphNodes(5);//阳性腋窝淋巴结
+        p.setNegativeAxillaryLymph(true);
+        p.setCancerSize(3);//乳房肿瘤大小
+        p.setConserveStandard(true);//保乳标准
+
+        //判断[全身辅助治疗（PAGE4）]所需参数
+        p.setHistologyType("导管癌");//组织学类型
+        p.setEr(0);
+        p.setPr(0);
+        p.setHer2(1);
+
+        //判断[随访（PAGE8）]所需参数
+        p.setPrimaryTumorStage("pT2");//原发肿瘤分期
+        p.setRegionalLymphNodesStage("pN0");//区域淋巴结分期
+        p.setLymphaticMetastasis(0);//淋巴结转移灶个数
+        p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
+
+        //判断[复发/IV期（PAGE18）]所需参数
+//        p.setClinicalStage("复发");
+
+        //判断[复发/IV期（M1）的全身治疗]所需参数
+//        p.setMetastaticSites("骨转移");
+//        p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
+
+        //判断[复发/IV期（M1）的全身治疗:ER和/或PR阴性；HER2阳性]所需参数
+//        p.setFrontLineStatus(1);
+//        p.setFrontLineTreatEvaluation("疾病进展");
+//        p.setFrontLineToxicityOfTolerance("无法耐受");
+
+        //已用方案
+//        p.setFrontLineTreatUsed("");
+
+        return p;
+    }
 
     @Test
     public void testBinv() {
@@ -78,16 +126,17 @@ public class BinvTest
     @Test
     public void testPatient() {
         KieSession kieSession = kieContainer.newKieSession("rules-patient");
-//        kieSession.insert(new Patient("T1","N0","M0"));
-        kieSession.insert(new Patient("T2","N0","M0"));
-//        kieSession.insert(new Patient("T3","N2","M0"));
+//        kieSession.addEventListener( new DebugRuleRuntimeEventListener() );
+        kieSession.addEventListener(new DefaultAgendaEventListener() {
+            public void afterMatchFired(AfterMatchFiredEvent event) {
+                super.afterMatchFired(event);
+//                System.out.println(event);
+            }
+        });
+        Patient patient = initPatient();
+        kieSession.insert(patient);
         kieSession.fireAllRules();
         kieSession.dispose();
-    }
-
-    @AfterAll
-    public static void cleanUp() {
-        kieContainer.dispose();
     }
 
 }

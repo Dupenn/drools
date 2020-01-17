@@ -1,145 +1,726 @@
 package rules.patient;
 
-import code.dp.drools.cdss.model.Patient;
+import code.dp.drools.cdss.model.Patient
+import code.dp.drools.cdss.model.Treatment
+import java.util.HashSet;
 
-rule "PAGE1-01:局域治疗"
+rule "局域治疗（BINV1-01）"
     salience 100
     no-loop
     when
-        $p:Patient(cT memberOf "T1,T2,T3", cN memberOf "N0,N1", cM == "M0")
+        Patient(cT =="T1", cN == "N0", cM == "M0")
+        or Patient(cT =="T0", cN == "N1", cM == "M0")
+        or Patient(cT =="T1", cN == "N1", cM == "M0")
+        or Patient(cT =="T2", cN == "N0", cM == "M0")
+        or Patient(cT =="T2", cN == "N1", cM == "M0")
+        or Patient(cT =="T3", cN == "N0", cM == "M0")
+        or Patient(cT =="T3", cN == "N1", cM == "M0")
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
         $p.setToPage2(true);
         update($p);
         System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见局域治疗（BINV-2）");
 end
 
-rule "PAGE1-02:考虑术前全身治疗"
+rule "考虑术前全身治疗（BINV1-02）"
     salience 100
     no-loop
     when
-        $p: Patient(cT == "T0", cN == "N1", cM == "M0")
+        Patient(cT =="T0", cN == "N1", cM == "M0")
+        or Patient(cT =="T1", cN == "N1", cM == "M0")
+        or Patient(cT =="T2", cN == "N0", cM == "M0")
+        or Patient(cT =="T2", cN == "N1", cM == "M0")
+        or Patient(cT =="T3", cN == "N0", cM == "M0")
+        or Patient(cT =="T3", cN == "N1", cM == "M0")
+        or Patient(cT =="T0", cN == "N2", cM == "M0")
+        or Patient(cT =="T1", cN == "N2", cM == "M0")
+        or Patient(cT =="T2", cN == "N2", cM == "M0")
+        or Patient(cT =="T3", cN == "N2", cM == "M0")
+        or Patient(cT =="T4", cN == "N0", cM == "M0")
+        or Patient(cT =="T4", cN == "N1", cM == "M0")
+        or Patient(cT =="T4", cN == "N2", cM == "M0")
+        or Patient(cT =="T0", cN == "N3", cM == "M0")
+        or Patient(cT =="T0", cN == "N3", cM == "M0")
+        or Patient(cT =="T1", cN == "N3", cM == "M0")
+        or Patient(cT =="T2", cN == "N3", cM == "M0")
+        or Patient(cT =="T3", cN == "N3", cM == "M0")
+        or Patient(cT =="T4", cN == "N3", cM == "M0")
+        or Patient(cT =="Tis", cN == "N3", cM == "M0")
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
         $p.setToPage11(true);
-        $p.setToPage15(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）");
 end
 
-rule "PAGE1-03:考虑术前全身治疗"
+rule "考虑术前全身治疗（BINV1-03）"
     salience 100
     no-loop
     when
-        $p: Patient(cT == "T1", cN == "N1", cM == "M0")
+        Patient(cT =="T0", cN == "N1", cM == "M0")
+        or Patient(cT =="T1", cN == "N1", cM == "M0")
+        or Patient(cT =="T2", cN == "N0", cM == "M0")
+        or Patient(cT =="T2", cN == "N1", cM == "M0")
+        or Patient(cT =="T3", cN == "N0", cM == "M0")
+        or Patient(cT =="T3", cN == "N1", cM == "M0")
+        or Patient(cT =="T0", cN == "N2", cM == "M0")
+        or Patient(cT =="T1", cN == "N2", cM == "M0")
+        or Patient(cT =="T2", cN == "N2", cM == "M0")
+        or Patient(cT =="T3", cN == "N2", cM == "M0")
+        or Patient(cT =="T4", cN == "N0", cM == "M0")
+        or Patient(cT =="T4", cN == "N1", cM == "M0")
+        or Patient(cT =="T4", cN == "N2", cM == "M0")
+        or Patient(cT =="T0", cN == "N3", cM == "M0")
+        or Patient(cT =="T0", cN == "N3", cM == "M0")
+        or Patient(cT =="T1", cN == "N3", cM == "M0")
+        or Patient(cT =="T2", cN == "N3", cM == "M0")
+        or Patient(cT =="T3", cN == "N3", cM == "M0")
+        or Patient(cT =="T4", cN == "N3", cM == "M0")
+        or Patient(cT =="Tis", cN == "N3", cM == "M0")
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
         $p.setToPage15(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
 end
 
-rule "PAGE1-04:考虑术前全身治疗"
-    salience 100
+rule "T1-3,N0-1,M0疾病的局域治疗（BINV2-01）"
+    salience 99
     no-loop
     when
-       $p: Patient(cT == "T2", cN == "N0", cM == "M0")
+        Patient(surgeryName=="乳房肿瘤切除术并外科腋窝分期（1类）", positiveAxillaryLymphNodes>=4, negativeAxillaryLymph==false, toPage2==true)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）、锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位（1类）推量照射。如果有化疗指征，放疗通常在化疗后进行。（参见BINV-4）");
 end
 
-rule "PAGE1-05:考虑术前全身治疗"
-    salience 100
+rule "T1-3,N0-1,M0疾病的局域治疗（BINV2-02）"
+    salience 99
     no-loop
     when
-        $p: Patient(cT == "T2", cN == "N1", cM == "M0")
+        Patient(surgeryName=="乳房肿瘤切除术并外科腋窝分期（1类）", positiveAxillaryLymphNodes>0, positiveAxillaryLymphNodes<3, negativeAxillaryLymph==false, toPage2==true)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）推量照射。积极考虑对锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位放疗。如果有化疗指征，放疗通常在化疗后进行。（参见BINV-4）");
 end
 
-rule "PAGE1-06:考虑术前全身治疗"
-    salience 100
+rule "T1-3,N0-1,M0疾病的局域治疗（BINV2-03）"
+    salience 99
     no-loop
     when
-        $p: Patient(cT == "T3", cN == "N0", cM == "M0")
+        Patient(surgeryName=="乳房肿瘤切除术并腋窝外科分期（1类）", positiveAxillaryLymphNodes==0, negativeAxillaryLymph==true, toPage2==true)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床（1类）推量照射。并考虑对肿瘤位于中央/内侧或是肿瘤>2cm且伴有其他高危特征（年轻或广泛淋巴脉管浸润[LVI]）的患者行区域淋巴放疗。或考虑对部分低危患者行加速部分乳房照射（APBI）。如果有化疗指征，放疗通常在化疗后进行。（参见BINV-4）");
 end
 
-rule "PAGE1-07:考虑术前全身治疗"
-    salience 100
+rule "T1-3,N0-1,M0疾病的局域治疗（BINV2-04）"
+    salience 99
     no-loop
     when
-        $p: Patient(cT == "T3", cN == "N0", cM == "M0")
+        Patient(surgeryName=="全乳切除并外科腋窝分期（1类）±乳房重建", toPage2==true)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage3(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“区域治疗”（BINV-3）");
 end
 
-rule "PAGE1-08:考虑术前全身治疗"
-    salience 100
+rule "T1-3,N0-1,M0疾病的局域治疗（BINV2-05）"
+    salience 99
     no-loop
     when
-        $p: Patient(cT == "T3", cN == "N1", cM == "M0")
+        Patient(cT == "T2")
+        or Patient(cT == "T3")
+        Patient(toPage2==true, surgeryName=="保乳治疗", conserveStandard==true, cancerSize < 5)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
         $p.setToPage11(true);
-        $p.setToPage15(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑术前全身治疗指南。（BINV-11)");
 end
 
-rule "PAGE1-09:考虑术前全身治疗"
-    salience 100
+rule "全身辅助治疗（BINV4-01）"
+    salience 98
     no-loop
     when
-        $p: Patient(cT memberOf "T0,T1,T2,T3", cN == "N2", cM == "M0")
+        Patient(toPage4==true, histologyType == "导管癌", er==1, pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1,pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1,pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "导管癌", er==0, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==0, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==0, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==0, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "导管癌", er==1, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1, pr==1, her2==1)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1, pr==1, her2==1)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage5(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阳性-HER2阳性疾病（BINV-5）");
 end
 
-rule "PAGE1-10:考虑术前全身治疗"
-    salience 100
+rule "全身辅助治疗（BINV4-02）"
+    salience 98
     no-loop
     when
-        $p: Patient(cT == "T4", cN memberOf "N0,N1,N2", cM == "M0")
+        Patient(toPage4==true, histologyType == "导管癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "导管癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "导管癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1, pr==1, her2==0)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage6(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病（BINV-6）");
 end
 
-rule "PAGE1-11:考虑术前全身治疗"
-    salience 100
+rule "全身辅助治疗（BINV4-03）"
+    salience 98
     no-loop
     when
-        $p: Patient(cT memberOf "T0,T1,T2,T3,T4,Tis", cN == "N3", cM == "M0")
+        Patient(toPage4==true, histologyType == "导管癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "导管癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==0, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "导管癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==1, pr==1, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==1, pr==1, her2==0)
+        $p: Patient()
     then
-        System.out.println("Fact: " + drools.getFactHandle($p).getObject().toString());
-        $p.setToPage11(true);
-        $p.setToPage15(true);
+        $p.setToPage7(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗（BINV-11）或参见无法手术的或局部晚期疾病（非炎性）的术前全身治疗：检查（BINV-15）");
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病（BINV-6）");
+end
+
+rule "全身辅助治疗（BINV4-04）"
+    salience 98
+    no-loop
+    when
+        $p: Patient()
+        Patient(toPage4==true, histologyType == "导管癌", er==0, pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==0, pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==0, pr==0, her2==1)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==0, pr==0, her2==1)
+    then
+        $p.setToPage8(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 激素受体阴性-HER2阳性疾病（BINV-8）");
+end
+
+rule "全身辅助治疗（BINV4-05）"
+    salience 98
+    no-loop
+    when
+        Patient(toPage4==true, histologyType == "导管癌", er==0, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "小叶癌", er==0, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "混合性癌", er==0, pr==0, her2==0)
+        or Patient(toPage4==true, histologyType == "化生性癌", er==0, pr==0, her2==0)
+        $p: Patient()
+    then
+        $p.setToPage9(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阴性-HER2阴性疾病（BINV-9）");
+end
+
+rule "全身辅助治疗（BINV4-06）"
+    salience 98
+    no-loop
+    when
+        Patient(toPage4==true, histologyType == "小管癌", er==1, pr==1)
+        or Patient(toPage4==true, histologyType == "黏液癌", er==1, pr==1)
+        or Patient(toPage4==true, histologyType == "小管癌", er==1, pr==0)
+        or Patient(toPage4==true, histologyType == "黏液癌", er==1, pr==0)
+        or Patient(toPage4==true, histologyType == "小管癌", er==0, pr==1)
+        or Patient(toPage4==true, histologyType == "黏液癌", er==0, pr==1)
+        or Patient(toPage4==true, histologyType == "小管癌", er==0, pr==0)
+        or Patient(toPage4==true, histologyType == "黏液癌", er==0, pr==0)
+        $p: Patient()
+    then
+        $p.setToPage10(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 表现良好的组织学类型（BINV-10）");
+end
+
+rule "全身辅助治疗：激素受体阴性-HER2阳性疾病（BINV8-01）"
+    salience 97
+    no-loop
+    when
+        Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN0", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        $p: Patient()
+    then
+        $p.setToPage18(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助化疗并曲妥珠单抗（2B类）（BINV-18）");
+end
+
+rule "全身辅助治疗：激素受体阴性-HER2阳性疾病（BINV8-02）"
+    salience 97
+    no-loop
+    when
+        Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT1", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT2", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT3", regionalLymphNodesStage=="pN1mi", lymphaticMetastasis==0, primaryTumorSize<=0.5)
+        $p: Patient()
+    then
+        $p.setToPage18(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗（BINV-17）");
+end
+
+rule "全身辅助治疗：激素受体阴性-HER2阳性疾病（BINV8-03）"
+    salience 97
+    no-loop
+    when
+        Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize<=1.0, primaryTumorSize > 0.6)
+        $p: Patient()
+    then
+        $p.setToPage18(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗（BINV-17）");
+end
+
+rule "全身辅助治疗：激素受体阴性-HER2阳性疾病（BINV8-04）"
+    salience 97
+    no-loop
+    when
+        Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "导管癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "小叶癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "混合性癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT1", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT2", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        or Patient(toPage8==true, histologyType == "化生性癌", primaryTumorStage == "pT3", lymphaticMetastasis==0, primaryTumorSize>1.0)
+        $p: Patient()
+    then
+        $p.setToPage18(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(1类)（BINV-17）");
+end
+
+rule "全身辅助治疗：激素受体阴性-HER2阳性疾病（BINV8-05）"
+    salience 97
+    no-loop
+    when
+        Patient(histologyType == "导管癌", lymphaticMetastasis > 0, toPage8 == true)
+        or Patient(histologyType == "小叶癌", lymphaticMetastasis > 0, toPage8 == true)
+        or Patient(histologyType == "混合性癌", lymphaticMetastasis > 0, toPage8 == true)
+        or Patient(histologyType == "化生性癌", lymphaticMetastasis > 0, toPage8 == true)
+        $p: Patient()
+    then
+        $p.setToPage18(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助化疗并曲妥珠单抗(1类) 或 内分泌治疗或辅助化疗并曲妥珠单抗+帕妥珠单抗（BINV-17）");
+end
+
+rule "复发或IV期（M1）疾病(BINV18-01)"
+    salience 96
+    no-loop
+    when
+        Patient(clinicalStage == "复发", toPage18 == true)
+        or Patient(histologyType == "IV期", toPage18 == true)
+        $p: Patient()
+    then
+        $p.setToPage19(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“局部和区域复发的治疗”（BINV-19）和支持治疗");
+end
+
+rule "复发或IV期（M1）疾病(BINV18-02)"
+    salience 96
+    no-loop
+    when
+        Patient(clinicalStage == "复发", toPage18 == true)
+        or Patient(histologyType == "IV期", toPage18 == true)
+        $p: Patient()
+    then
+        $p.setToPage20(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“复发或IV期(M1)疾病的全身治疗”（BINV-20）和支持治疗");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-01)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(metastaticSites == "骨转移", toPage20 == true)
+    then
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 加用地诺单抗、唑来勝酸或帕米膦酸");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-02)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==1, her2==0)
+    then
+        $p.setToPage21(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-03)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==0, her2==0)
+    then
+        $p.setToPage21(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-04)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==1, her2==0)
+    then
+        $p.setToPage21(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-05)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==1, her2==1, treatedOfThePastYear == true)
+    then
+        $p.setToPage23(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-06)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==0, her2==1, treatedOfThePastYear == true)
+    then
+        $p.setToPage23(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-07)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==1, her2==1, treatedOfThePastYear == true)
+    then
+        $p.setToPage23(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-08)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==1, her2==1, treatedOfThePastYear == false)
+    then
+        $p.setToPage24(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-09)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==0, her2==1, treatedOfThePastYear == false)
+    then
+        $p.setToPage24(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-10)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==1, her2==1, treatedOfThePastYear == false)
+    then
+        $p.setToPage24(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-11)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==0, her2==1)
+    then
+        $p.setToPage26(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-12)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==1, her2==1)
+    then
+        $p.setToPage26(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-13)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==0, her2==1)
+    then
+        $p.setToPage26(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-14)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==0, her2==0)
+    then
+        $p.setToPage27(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-15)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==0, pr==1, her2==0)
+    then
+        $p.setToPage27(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV20-16)"
+    salience 95
+    no-loop
+    when
+        $p: Patient(toPage20 == true, er==1, pr==0, her2==0)
+    then
+        $p.setToPage27(true);
+        update($p);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV26-01)"
+    salience 94
+    no-loop
+    when
+        Patient(toPage26 == true, thirdLineStatus == 1, thirdLineTreatEvaluation == "疾病进展")
+        or Patient(toPage26 == true, thirdLineStatus == 1, ecogPerformanceStatus >=3)
+        $p: Patient()
+    then
+        //排除 : 一线已用方案、二线已用方案、三线已用方案
+        HashSet<String> treatment = new HashSet<>();
+        treatment.add("支持治疗");
+        treatment.add("曲妥珠单抗+拉帕替尼");
+        treatment.remove($p.getFrontLineTreatUsed());
+        treatment.remove($p.getSecondLineTreatUsed());
+        treatment.remove($p.getThirdLineTreatUsed());
+        $p.setTreatmentName(treatment);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV26-02)"
+    salience 94
+    no-loop
+    when
+        Patient(toPage26 == true, thirdLineStatus == 0, secondLineStatus == 1, secondLineTreatEvaluation == "疾病进展")
+        or Patient(toPage26 == true, thirdLineStatus == 0, secondLineStatus == 1, secondLineToxicityOfTolerance == "无法耐受")
+        $p: Patient()
+    then
+        //TODO 排除 : 一线已用方案、二线已用方案
+        HashSet<String> treatment = new HashSet<>();
+        treatment.add("帕妥珠单抗+曲妥珠单抗+多西他赛");
+        treatment.add("帕妥珠单抗+曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+美坦新偶联物(T-DM1 )");
+        treatment.add("曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+紫杉醇+卡铂");
+        treatment.add("曲妥珠单抗+多西他赛");
+        treatment.add("曲妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+卡培他滨");
+        treatment.add("拉帕替尼+卡培他演");
+        treatment.add("曲妥珠单抗+拉帕替尼");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡培他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+吉西他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+奥拉帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+他拉唑帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+吉西他滨");
+        treatment.remove($p.getFrontLineTreatUsed());
+        $p.setTreatmentName(treatment);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV26-03)"
+    salience 94
+    no-loop
+    when
+        Patient(toPage26 == true, thirdLineStatus == 0, secondLineStatus == 0, frontLineStatus == 1, frontLineTreatEvaluation == "疾病进展")
+        or Patient(toPage26 == true, thirdLineStatus == 0, secondLineStatus == 0, frontLineStatus == 1, frontLineToxicityOfTolerance == "无法耐受")
+        $p: Patient()
+    then
+        HashSet<String> treatment = new HashSet<>();
+        treatment.add("帕妥珠单抗+曲妥珠单抗+多西他赛");
+        treatment.add("帕妥珠单抗+曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+美坦新偶联物(T-DM1 )");
+        treatment.add("曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+紫杉醇+卡铂");
+        treatment.add("曲妥珠单抗+多西他赛");
+        treatment.add("曲妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+卡培他滨");
+        treatment.add("拉帕替尼+卡培他演");
+        treatment.add("曲妥珠单抗+拉帕替尼");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡培他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+吉西他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+奥拉帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+他拉唑帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+吉西他滨");
+        treatment.remove($p.getFrontLineTreatUsed());
+        treatment.remove($p.getSecondLineTreatUsed());
+        $p.setTreatmentName(treatment);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+end
+
+rule "复发或IV期(M1)疾病的全身治疗(BINV26-04)"
+    salience 94
+    no-loop
+    when
+        Patient(toPage26 == true, thirdLineStatus == 0, secondLineStatus == 0, frontLineStatus == 0)
+        $p: Patient()
+    then
+        HashSet<String> treatment = new HashSet<>();
+        treatment.add("帕妥珠单抗+曲妥珠单抗+多西他赛");
+        treatment.add("帕妥珠单抗+曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+美坦新偶联物(T-DM1 )");
+        treatment.add("曲妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+紫杉醇+卡铂");
+        treatment.add("曲妥珠单抗+多西他赛");
+        treatment.add("曲妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+卡培他滨");
+        treatment.add("拉帕替尼+卡培他演");
+        treatment.add("曲妥珠单抗+拉帕替尼");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡培他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+吉西他滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+长春瑞滨");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+奥拉帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+他拉唑帕利");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+帕妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+伊沙匹隆");
+        treatment.add("曲妥珠单抗+表阿霉素");
+        treatment.add("曲妥珠单抗+顺铂");
+        treatment.add("曲妥珠单抗+白蛋白结合紫杉醇");
+        treatment.add("曲妥珠单抗+卡铂");
+        treatment.add("曲妥珠单抗+环磷酰胺");
+        treatment.add("曲妥珠单抗+艾日布林");
+        treatment.add("曲妥珠单抗+吉西他滨");
+        $p.setTreatmentName(treatment);
+        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
 end
