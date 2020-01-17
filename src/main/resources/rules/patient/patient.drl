@@ -722,9 +722,6 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV26-03)"
         treatment.add("曲妥珠单抗+环磷酰胺");
         treatment.add("曲妥珠单抗+艾日布林");
         treatment.add("曲妥珠单抗+吉西他滨");
-        System.out.println("FrontLineTreatUsed:"+$p.getFrontLineTreatUsed());
-        System.out.println("SecondLineTreatUsed:"+$p.getSecondLineTreatUsed());
-
         treatment.remove($p.getFrontLineTreatUsed());
         treatment.remove($p.getSecondLineTreatUsed());
         $p.setTreatmentName(treatment);
