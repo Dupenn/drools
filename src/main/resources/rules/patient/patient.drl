@@ -19,7 +19,8 @@ rule "局域治疗(BINV1-01)"
     then
         $p.setToPage2(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见局域治疗(BINV-2)");
+        String result = "参见局域治疗(BINV-2)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "考虑术前全身治疗(BINV1-02)"
@@ -50,7 +51,8 @@ rule "考虑术前全身治疗(BINV1-02)"
     then
         $p.setToPage11(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: BINV-1 -> 参见可手术疾病的术前全身治疗(BINV-11)");
+        String result = "参见可手术疾病的术前全身治疗(BINV-11)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "考虑术前全身治疗(BINV1-03)"
@@ -81,7 +83,8 @@ rule "考虑术前全身治疗(BINV1-03)"
     then
         $p.setToPage15(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见无法手术的或局部晚期疾病(非炎性)的术前全身治疗：检查(BINV-15)");
+        String result = "参见无法手术的或局部晚期疾病(非炎性)的术前全身治疗：检查(BINV-15)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-01)"
@@ -93,7 +96,8 @@ rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-01)"
     then
         $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床(1类)、锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位(1类)推量照射。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)");
+        String result = "全乳放疗伴或不伴瘤床(1类)、锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位(1类)推量照射。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-02)"
@@ -105,7 +109,8 @@ rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-02)"
     then
         $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床(1类)推量照射。积极考虑对锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位放疗。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)");
+        String result = "全乳放疗伴或不伴瘤床(1类)推量照射。积极考虑对锁骨下区、锁骨上区、内乳淋巴结及腋窝床的任何危及部位放疗。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-03)"
@@ -117,7 +122,8 @@ rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-03)"
     then
         $p.setToPage4(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 全乳放疗伴或不伴瘤床(1类)推量照射。并考虑对肿瘤位于中央/内侧或是肿瘤>2cm且伴有其他高危特征(年轻或广泛淋巴脉管浸润[LVI])的患者行区域淋巴放疗。或考虑对部分低危患者行加速部分乳房照射(APBI)。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)");
+        String result = "全乳放疗伴或不伴瘤床(1类)推量照射。并考虑对肿瘤位于中央/内侧或是肿瘤>2cm且伴有其他高危特征(年轻或广泛淋巴脉管浸润[LVI])的患者行区域淋巴放疗。或考虑对部分低危患者行加速部分乳房照射(APBI)。如果有化疗指征，放疗通常在化疗后进行。(参见BINV-4)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-04)"
@@ -129,7 +135,8 @@ rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-04)"
     then
         $p.setToPage3(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“区域治疗”(BINV-3)");
+        String result = "参见“区域治疗”(BINV-3)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-05)"
@@ -143,7 +150,8 @@ rule "T1-3,N0-1,M0疾病的局域治疗(BINV2-05)"
     then
         $p.setToPage11(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑术前全身治疗指南。(BINV-11)");
+        String result = "考虑术前全身治疗指南。(BINV-11)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-01)"
@@ -166,7 +174,8 @@ rule "全身辅助治疗(BINV4-01)"
     then
         $p.setToPage5(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阳性-HER2阳性疾病(BINV-5)");
+        String result = "参见全身辅助治疗：激素受体阳性-HER2阳性疾病(BINV-5)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-02)"
@@ -189,7 +198,8 @@ rule "全身辅助治疗(BINV4-02)"
     then
         $p.setToPage6(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病(BINV-6)");
+        String result = "参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病(BINV-6)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-03)"
@@ -212,7 +222,8 @@ rule "全身辅助治疗(BINV4-03)"
     then
         $p.setToPage7(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 淋巴结阴性-激素受体阳性-HER2阴性疾病(BINV-6)");
+        String result = "参见全身辅助治疗： 淋巴结阳性-激素受体阳性-HER2阴性疾病(BINV-7)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-04)"
@@ -227,7 +238,8 @@ rule "全身辅助治疗(BINV4-04)"
     then
         $p.setToPage8(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 激素受体阴性-HER2阳性疾病(BINV-8)");
+        String result = "参见全身辅助治疗： 激素受体阴性-HER2阳性疾病(BINV-8)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-05)"
@@ -242,7 +254,8 @@ rule "全身辅助治疗(BINV4-05)"
     then
         $p.setToPage9(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗：激素受体阴性-HER2阴性疾病(BINV-9)");
+        String result = "参见全身辅助治疗：激素受体阴性-HER2阴性疾病(BINV-9)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗(BINV4-06)"
@@ -261,7 +274,8 @@ rule "全身辅助治疗(BINV4-06)"
     then
         $p.setToPage10(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见全身辅助治疗： 表现良好的组织学类型(BINV-10)");
+        String result = "参见全身辅助治疗： 表现良好的组织学类型(BINV-10)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-01)"
@@ -284,7 +298,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-01)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助化疗并曲妥珠单抗(2B类)(BINV-18)");
+        String result = "考虑辅助化疗并曲妥珠单抗(2B类)(BINV-18)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-02)"
@@ -307,7 +322,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-02)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(BINV-17)");
+        String result = "考虑辅助辅助化疗并曲妥珠单抗(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-03)"
@@ -330,7 +346,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-03)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(BINV-17)");
+        String result = "考虑辅助辅助化疗并曲妥珠单抗(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-04)"
@@ -353,7 +370,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-04)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(BINV-17)");
+        String result = "考虑辅助辅助化疗并曲妥珠单抗(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-05)"
@@ -376,7 +394,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-05)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(1类)(BINV-17)");
+        String result = "考虑辅助辅助化疗并曲妥珠单抗(1类)(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-06)"
@@ -399,7 +418,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-06)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 考虑辅助辅助化疗并曲妥珠单抗(1类)(BINV-17)");
+        String result = "考虑辅助辅助化疗并曲妥珠单抗(1类)(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-07)"
@@ -414,7 +434,8 @@ rule "全身辅助治疗：激素受体阴性-HER2阳性疾病(BINV8-07)"
     then
         $p.setToPage18(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 辅助化疗并曲妥珠单抗(1类) 或 内分泌治疗或辅助化疗并曲妥珠单抗+帕妥珠单抗(BINV-17)");
+        String result = "辅助化疗并曲妥珠单抗(1类) 或 内分泌治疗或辅助化疗并曲妥珠单抗+帕妥珠单抗(BINV-17)";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病(BINV18-01)"
@@ -427,7 +448,8 @@ rule "复发或IV期(M1)疾病(BINV18-01)"
     then
         $p.setToPage19(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“局部和区域复发的治疗”(BINV-19)和支持治疗");
+        String result = "参见“局部和区域复发的治疗”(BINV-19)和支持治疗";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病(BINV18-02)"
@@ -440,7 +462,8 @@ rule "复发或IV期(M1)疾病(BINV18-02)"
     then
         $p.setToPage20(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见“复发或IV期(M1)疾病的全身治疗”(BINV-20)和支持治疗");
+        String result = "参见“复发或IV期(M1)疾病的全身治疗”(BINV-20)和支持治疗";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-01)"
@@ -449,7 +472,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-01)"
     when
         $p: Patient(metastaticSites == "骨转移", toPage20 == true)
     then
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 加用地诺单抗、唑来勝酸或帕米膦酸");
+        String result = "加用地诺单抗、唑来勝酸或帕米膦酸";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-02)"
@@ -460,7 +484,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-02)"
     then
         $p.setToPage21(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+        String result = "参见BINV-21";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-03)"
@@ -471,7 +496,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-03)"
     then
         $p.setToPage21(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+        String result = "参见BINV-21";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-04)"
@@ -482,7 +508,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-04)"
     then
         $p.setToPage21(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-21");
+        String result = "参见BINV-21";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-05)"
@@ -493,7 +520,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-05)"
     then
         $p.setToPage23(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+        String result = "参见BINV-23";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-06)"
@@ -504,7 +532,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-06)"
     then
         $p.setToPage23(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+        String result = "参见BINV-23";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-07)"
@@ -515,7 +544,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-07)"
     then
         $p.setToPage23(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-23");
+        String result = "参见BINV-23";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-08)"
@@ -526,7 +556,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-08)"
     then
         $p.setToPage24(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+        String result = "参见BINV-24";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-09)"
@@ -537,7 +568,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-09)"
     then
         $p.setToPage24(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+        String result = "参见BINV-24";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-10)"
@@ -548,7 +580,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-10)"
     then
         $p.setToPage24(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-24");
+        String result = "参见BINV-24";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-11)"
@@ -559,7 +592,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-11)"
     then
         $p.setToPage26(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+        String result = "参见BINV-26";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-12)"
@@ -570,7 +604,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-12)"
     then
         $p.setToPage26(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+        String result = "参见BINV-26";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-13)"
@@ -581,7 +616,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-13)"
     then
         $p.setToPage26(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-26");
+        String result = "参见BINV-26";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-14)"
@@ -592,7 +628,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-14)"
     then
         $p.setToPage27(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+        String result = "参见BINV-27";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-15)"
@@ -603,7 +640,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-15)"
     then
         $p.setToPage27(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+        String result = "参见BINV-27";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV20-16)"
@@ -614,7 +652,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV20-16)"
     then
         $p.setToPage27(true);
         update($p);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: 参见BINV-27");
+        String result = "参见BINV-27";
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV26-01)"
@@ -633,7 +672,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV26-01)"
         treatment.remove($p.getSecondLineTreatUsed());
         treatment.remove($p.getThirdLineTreatUsed());
         $p.setTreatmentName(treatment);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+        String result = $p.getTreatmentName().toString();
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV26-02)"
@@ -679,7 +719,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV26-02)"
         treatment.add("曲妥珠单抗+吉西他滨");
         treatment.remove($p.getFrontLineTreatUsed());
         $p.setTreatmentName(treatment);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+        String result = $p.getTreatmentName().toString();
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV26-03)"
@@ -725,7 +766,8 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV26-03)"
         treatment.remove($p.getFrontLineTreatUsed());
         treatment.remove($p.getSecondLineTreatUsed());
         $p.setTreatmentName(treatment);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+        String result = $p.getTreatmentName().toString();
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
 
 rule "复发或IV期(M1)疾病的全身治疗(BINV26-04)"
@@ -768,5 +810,6 @@ rule "复发或IV期(M1)疾病的全身治疗(BINV26-04)"
         treatment.add("曲妥珠单抗+艾日布林");
         treatment.add("曲妥珠单抗+吉西他滨");
         $p.setTreatmentName(treatment);
-        System.out.println("rule_name: " + drools.getRule().getName() + " ,result: " + $p.getTreatmentName().toString());
+        String result = $p.getTreatmentName().toString();
+        System.out.println(drools.getRule().getName() + " ==> " + result);
 end
