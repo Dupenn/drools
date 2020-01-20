@@ -2,7 +2,6 @@ package code.dp.drools.cdss.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * @Author: Dupeng
@@ -14,31 +13,55 @@ import java.util.List;
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = -6096428459909290663L;
-    // TNM 分期
+    // TNM 分期(术前)
     private String cT;
     private String cN;
     private String cM;
+    //前哨淋巴结活检
+    private String slnb;
+    //外科腋窝分期
+    private String surgicalAxillaryStaging;
+    //术前全身治疗方案名称
+    private String systemicTherapyName;
+    //术前全身治疗方案缓解情况
+    private String systemicTherapyStatus;
     // 手术名称
     private String surgeryName;
-    // 淋巴结阴性
+    //术前方案是否完成 完成true/未完成false
+    private Boolean beforeSurgeryStatus = false;
+    // 术后腋窝淋巴结阴性
     private Boolean negativeAxillaryLymph = false;
-    // 阳性淋巴结数量
+    // 术后腋窝阳性淋巴结数量
     private Integer positiveAxillaryLymphNodes = 0;
-
+    // 术后腋窝淋巴结阴性
+    private Boolean negativeAxillaryLymphBeforeSurgery = false;
+    // 术后腋窝阳性淋巴结数量
+    private Integer positiveAxillaryLymphNodesBeforeSurgery = 0;
+    //术前全身治疗淋巴结转为阴性的可能
+    private Boolean positive2NegativeBeforeSurgery = false;
     // 保乳标准
     private Boolean conserveStandard = false;
     // 肿瘤大小cm
     private Integer cancerSize = 0;
     // 组织学类型
     private String histologyType;
-    // 激素受体状态
+    // 激素受体状态（术后）
     private Integer pr = 0;
     private Integer er = 0;
     private Integer her2 = 0;
-    //原发肿瘤分期
-    private String primaryTumorStage;
-    // 区域淋巴结分期
-    private String regionalLymphNodesStage;
+    private Integer prBeforeSurgery = 0;
+    private Integer erBeforeSurgery = 0;
+    private Integer her2BeforeSurgery = 0;
+    //原发肿瘤分期(术后pTNM)
+    private String pT;
+    private String pN;
+    private String pM;
+    private String ypT;
+    private String ypN;
+    private String ypM;
+
+    //术前辅助治疗后腋窝淋巴结 1阳性0阴性
+    private Integer preoperativeAdjuvantTreatmentOfAxillaryLymphNodes;
     //原发肿瘤直径cm
     private Float primaryTumorSize = 0f;
     //淋巴转移灶直径大于2mm的个数
@@ -62,14 +85,32 @@ public class Patient implements Serializable {
     // 毒性耐受
     private String frontLineToxicityOfTolerance;
     private String secondLineToxicityOfTolerance;
-
     // 方案名称
     private HashSet<String> treatmentName;
-
     //已用方案
     private String frontLineTreatUsed;
     private String secondLineTreatUsed;
     private String thirdLineTreatUsed;
+    //临床腋窝淋巴结 阴性0/阳性1
+    private int clinicalAxillaryLymphNode;
+    // 腋窝淋巴结穿刺结果 阴性0/阳性1
+    private int axillaryLymphNodePunctureResults;
+    //新辅助化疗后临床腋窝淋巴结 阴性0/阳性1
+    private int clinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy;
+    //新辅助化疗后腋窝淋巴结穿刺结果 阴性0/阳性1
+    private int resultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy;
+    //术前辅助化疗
+    private String preoperativeChemotherapy;
+
+    private Boolean considerPreoperativeSystemicTreatment;
+
+    public Boolean getConsiderPreoperativeSystemicTreatment() {
+        return considerPreoperativeSystemicTreatment;
+    }
+
+    public void setConsiderPreoperativeSystemicTreatment(Boolean considerPreoperativeSystemicTreatment) {
+        this.considerPreoperativeSystemicTreatment = considerPreoperativeSystemicTreatment;
+    }
 
     /**
      * 页面跳转
@@ -100,6 +141,16 @@ public class Patient implements Serializable {
     private Boolean toPage25 = false;
     private Boolean toPage26 = false;
     private Boolean toPage27 = false;
+    private Boolean toPageJ = false;
+    private Boolean toPageK = false;
+
+    //绝经前0，绝经后1
+    private Integer menstrualStatus;
+    private String endocrinotherapy1;
+    private String endocrinotherapy2;
+    private String endocrinotherapy3;
+    //禁忌
+    private String taboos;
 
     public Patient() {
     }
@@ -108,6 +159,126 @@ public class Patient implements Serializable {
         this.cT = cT;
         this.cN = cN;
         this.cM = cM;
+    }
+
+    public String getTaboos() {
+        return taboos;
+    }
+
+    public void setTaboos(String taboos) {
+        this.taboos = taboos;
+    }
+
+    public String getEndocrinotherapy1() {
+        return endocrinotherapy1;
+    }
+
+    public void setEndocrinotherapy1(String endocrinotherapy1) {
+        this.endocrinotherapy1 = endocrinotherapy1;
+    }
+
+    public String getEndocrinotherapy2() {
+        return endocrinotherapy2;
+    }
+
+    public void setEndocrinotherapy2(String endocrinotherapy2) {
+        this.endocrinotherapy2 = endocrinotherapy2;
+    }
+
+    public String getEndocrinotherapy3() {
+        return endocrinotherapy3;
+    }
+
+    public void setEndocrinotherapy3(String endocrinotherapy3) {
+        this.endocrinotherapy3 = endocrinotherapy3;
+    }
+
+    public Integer getMenstrualStatus() {
+        return menstrualStatus;
+    }
+
+    public void setMenstrualStatus(Integer menstrualStatus) {
+        this.menstrualStatus = menstrualStatus;
+    }
+
+    public Integer getPreoperativeAdjuvantTreatmentOfAxillaryLymphNodes() {
+        return preoperativeAdjuvantTreatmentOfAxillaryLymphNodes;
+    }
+
+    public void setPreoperativeAdjuvantTreatmentOfAxillaryLymphNodes(Integer preoperativeAdjuvantTreatmentOfAxillaryLymphNodes) {
+        this.preoperativeAdjuvantTreatmentOfAxillaryLymphNodes = preoperativeAdjuvantTreatmentOfAxillaryLymphNodes;
+    }
+
+    public String getYpT() {
+        return ypT;
+    }
+
+    public void setYpT(String ypT) {
+        this.ypT = ypT;
+    }
+
+    public String getYpN() {
+        return ypN;
+    }
+
+    public void setYpN(String ypN) {
+        this.ypN = ypN;
+    }
+
+    public String getYpM() {
+        return ypM;
+    }
+
+    public void setYpM(String ypM) {
+        this.ypM = ypM;
+    }
+
+    public String getPreoperativeChemotherapy() {
+        return preoperativeChemotherapy;
+    }
+
+    public void setPreoperativeChemotherapy(String preoperativeChemotherapy) {
+        this.preoperativeChemotherapy = preoperativeChemotherapy;
+    }
+
+    public String getSlnb() {
+        return slnb;
+    }
+
+    public void setSlnb(String slnb) {
+        this.slnb = slnb;
+    }
+
+    public String getSurgicalAxillaryStaging() {
+        return surgicalAxillaryStaging;
+    }
+
+    public void setSurgicalAxillaryStaging(String surgicalAxillaryStaging) {
+        this.surgicalAxillaryStaging = surgicalAxillaryStaging;
+    }
+
+    public String getSystemicTherapyStatus() {
+        return systemicTherapyStatus;
+    }
+
+    public void setSystemicTherapyStatus(String systemicTherapyStatus) {
+        this.systemicTherapyStatus = systemicTherapyStatus;
+    }
+
+    public Boolean getToPageJ() {
+        return toPageJ;
+    }
+
+    public void setToPageJ(Boolean toPageJ) {
+        this.toPageJ = toPageJ;
+    }
+
+    public Boolean getToPageK() {
+        return toPageK;
+    }
+
+    public void setToPageK(Boolean toPageK) {
+        this.toPageK = toPageK;
     }
 
     public String getcT() {
@@ -206,20 +377,20 @@ public class Patient implements Serializable {
         this.her2 = her2;
     }
 
-    public String getPrimaryTumorStage() {
-        return primaryTumorStage;
+    public String getpT() {
+        return pT;
     }
 
-    public void setPrimaryTumorStage(String primaryTumorStage) {
-        this.primaryTumorStage = primaryTumorStage;
+    public void setpT(String pT) {
+        this.pT = pT;
     }
 
-    public String getRegionalLymphNodesStage() {
-        return regionalLymphNodesStage;
+    public String getpN() {
+        return pN;
     }
 
-    public void setRegionalLymphNodesStage(String regionalLymphNodesStage) {
-        this.regionalLymphNodesStage = regionalLymphNodesStage;
+    public void setpN(String pN) {
+        this.pN = pN;
     }
 
     public Float getPrimaryTumorSize() {
@@ -574,6 +745,110 @@ public class Patient implements Serializable {
         this.toPage27 = toPage27;
     }
 
+    public String getpM() {
+        return pM;
+    }
+
+    public void setpM(String pM) {
+        this.pM = pM;
+    }
+
+    public Boolean getNegativeAxillaryLymphBeforeSurgery() {
+        return negativeAxillaryLymphBeforeSurgery;
+    }
+
+    public void setNegativeAxillaryLymphBeforeSurgery(Boolean negativeAxillaryLymphBeforeSurgery) {
+        this.negativeAxillaryLymphBeforeSurgery = negativeAxillaryLymphBeforeSurgery;
+    }
+
+    public Integer getPositiveAxillaryLymphNodesBeforeSurgery() {
+        return positiveAxillaryLymphNodesBeforeSurgery;
+    }
+
+    public void setPositiveAxillaryLymphNodesBeforeSurgery(Integer positiveAxillaryLymphNodesBeforeSurgery) {
+        this.positiveAxillaryLymphNodesBeforeSurgery = positiveAxillaryLymphNodesBeforeSurgery;
+    }
+
+    public Integer getPrBeforeSurgery() {
+        return prBeforeSurgery;
+    }
+
+    public void setPrBeforeSurgery(Integer prBeforeSurgery) {
+        this.prBeforeSurgery = prBeforeSurgery;
+    }
+
+    public Integer getErBeforeSurgery() {
+        return erBeforeSurgery;
+    }
+
+    public void setErBeforeSurgery(Integer erBeforeSurgery) {
+        this.erBeforeSurgery = erBeforeSurgery;
+    }
+
+    public Integer getHer2BeforeSurgery() {
+        return her2BeforeSurgery;
+    }
+
+    public void setHer2BeforeSurgery(Integer her2BeforeSurgery) {
+        this.her2BeforeSurgery = her2BeforeSurgery;
+    }
+
+    public Boolean getPositive2NegativeBeforeSurgery() {
+        return positive2NegativeBeforeSurgery;
+    }
+
+    public void setPositive2NegativeBeforeSurgery(Boolean positive2NegativeBeforeSurgery) {
+        this.positive2NegativeBeforeSurgery = positive2NegativeBeforeSurgery;
+    }
+
+    public String getSystemicTherapyName() {
+        return systemicTherapyName;
+    }
+
+    public void setSystemicTherapyName(String systemicTherapyName) {
+        this.systemicTherapyName = systemicTherapyName;
+    }
+
+    public int getClinicalAxillaryLymphNode() {
+        return clinicalAxillaryLymphNode;
+    }
+
+    public void setClinicalAxillaryLymphNode(int clinicalAxillaryLymphNode) {
+        this.clinicalAxillaryLymphNode = clinicalAxillaryLymphNode;
+    }
+
+    public int getAxillaryLymphNodePunctureResults() {
+        return axillaryLymphNodePunctureResults;
+    }
+
+    public void setAxillaryLymphNodePunctureResults(int axillaryLymphNodePunctureResults) {
+        this.axillaryLymphNodePunctureResults = axillaryLymphNodePunctureResults;
+    }
+
+    public int getClinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy() {
+        return clinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy;
+    }
+
+    public void setClinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy(int clinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy) {
+        this.clinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy = clinicalAxillaryLymphNodesAfterNeoadjuvantChemotherapy;
+    }
+
+    public int getResultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy() {
+        return resultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy;
+    }
+
+    public void setResultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy(int resultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy) {
+        this.resultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy = resultsOfAxillaryLymphNodePunctureAfterNeoadjuvantChemotherapy;
+    }
+
+    public Boolean getBeforeSurgeryStatus() {
+        return beforeSurgeryStatus;
+    }
+
+    public void setBeforeSurgeryStatus(Boolean beforeSurgeryStatus) {
+        this.beforeSurgeryStatus = beforeSurgeryStatus;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -589,8 +864,8 @@ public class Patient implements Serializable {
                 ", pr=" + pr +
                 ", er=" + er +
                 ", her2=" + her2 +
-                ", primaryTumorStage='" + primaryTumorStage + '\'' +
-                ", regionalLymphNodesStage='" + regionalLymphNodesStage + '\'' +
+                ", primaryTumorStage='" + pT + '\'' +
+                ", regionalLymphNodesStage='" + pN + '\'' +
                 ", primaryTumorSize=" + primaryTumorSize +
                 ", lymphaticMetastasis=" + lymphaticMetastasis +
                 ", clinicalStage='" + clinicalStage + '\'' +

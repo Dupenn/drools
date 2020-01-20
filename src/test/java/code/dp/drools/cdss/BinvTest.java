@@ -30,6 +30,96 @@ public class BinvTest
         kieContainer.dispose();
     }
 
+    public static Patient sixthCase() {
+
+        Patient p = new Patient("T2", "N1", "M0");
+
+        // 判断[局域治疗（Page2）]所需参数
+        p.setSurgeryName("全乳切除并外科腋窝分期(1类)±乳房重建");
+        p.setSurgicalAxillaryStaging("前哨淋巴结活检");
+//        p.setPositiveAxillaryLymphNodes(2);//阳性腋窝淋巴结
+        p.setNegativeAxillaryLymph(true);
+        p.setCancerSize(3);//乳房肿瘤大小
+        p.setConserveStandard(true);//保乳标准
+        p.setAxillaryLymphNodePunctureResults(1);
+        p.setSystemicTherapyStatus("部分缓解，乳房肿瘤切除术不可行");
+        p.setConsiderPreoperativeSystemicTreatment(true);
+        //判断[全身辅助治疗（PAGE4）]所需参数
+        p.setHistologyType("导管癌");//组织学类型
+        p.setEr(1);
+        p.setPr(1);
+        p.setHer2(0);
+        p.setYpN("N0");
+        p.setMenstrualStatus(0);
+        //判断[随访（PAGE8）]所需参数
+        p.setpT("pT1");//原发肿瘤分期
+        p.setpN("pN0");//区域淋巴结分期
+//        p.setLymphaticMetastasis(0);//淋巴结转移灶个数
+//        p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
+
+        //判断[复发/IV期（PAGE18）]所需参数
+//        p.setClinicalStage("复发");
+
+        //判断[复发/IV期（M1）的全身治疗]所需参数
+//        p.setMetastaticSites("肝转移");
+//        p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
+
+        //判断[复发/IV期（M1）的全身治疗:ER和/或PR阴性；HER2阳性]所需参数
+//        p.setFrontLineTreatEvaluation("疾病进展");
+//        p.setFrontLineToxicityOfTolerance("无法耐受");
+//        p.setFrontLineStatus(1);
+//        p.setSecondLineStatus(0);
+//        p.setThirdLineStatus(0);
+
+        //已用方案
+        p.setFrontLineTreatUsed("曲妥珠单抗+美坦新偶联物(T-DM1)");
+
+        return p;
+    }
+
+    public static Patient fourthCase() {
+
+        Patient p = new Patient("T2", "N1", "M0");
+
+        // 判断[局域治疗（Page2）]所需参数
+        p.setSurgeryName("乳房肿瘤切除术并外科腋窝分期(1类)");
+        p.setPositiveAxillaryLymphNodes(2);//阳性腋窝淋巴结
+//        p.setNegativeAxillaryLymph(true);
+//        p.setCancerSize(3);//乳房肿瘤大小
+//        p.setConserveStandard(true);//保乳标准
+
+        //判断[全身辅助治疗（PAGE4）]所需参数
+        p.setHistologyType("导管癌");//组织学类型
+        p.setEr(1);
+        p.setPr(1);
+        p.setHer2(1);
+
+        //判断[随访（PAGE8）]所需参数
+        p.setpT("pT1");//原发肿瘤分期
+        p.setpN("pN0");//区域淋巴结分期
+//        p.setLymphaticMetastasis(0);//淋巴结转移灶个数
+//        p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
+
+        //判断[复发/IV期（PAGE18）]所需参数
+//        p.setClinicalStage("复发");
+
+        //判断[复发/IV期（M1）的全身治疗]所需参数
+//        p.setMetastaticSites("肝转移");
+//        p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
+
+        //判断[复发/IV期（M1）的全身治疗:ER和/或PR阴性；HER2阳性]所需参数
+//        p.setFrontLineTreatEvaluation("疾病进展");
+//        p.setFrontLineToxicityOfTolerance("无法耐受");
+//        p.setFrontLineStatus(1);
+//        p.setSecondLineStatus(0);
+//        p.setThirdLineStatus(0);
+
+        //已用方案
+        p.setFrontLineTreatUsed("曲妥珠单抗+美坦新偶联物(T-DM1)");
+
+        return p;
+    }
+
     public static Patient fifthCase() {
 
         Patient p = new Patient("T1", "N0", "M0");
@@ -48,8 +138,8 @@ public class BinvTest
         p.setHer2(1);
 
         //判断[随访（PAGE8）]所需参数
-        p.setPrimaryTumorStage("pT2");//原发肿瘤分期
-        p.setRegionalLymphNodesStage("pN0");//区域淋巴结分期
+        p.setpT("pT2");//原发肿瘤分期
+        p.setpN("pN0");//区域淋巴结分期
         p.setLymphaticMetastasis(0);//淋巴结转移灶个数
         p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
 
@@ -61,14 +151,18 @@ public class BinvTest
         p.setTreatedOfThePastYear(true);//过去一年是否接受过治疗
 
         //判断[复发/IV期（M1）的全身治疗:ER和/或PR阴性；HER2阳性]所需参数
-        p.setFrontLineTreatEvaluation("疾病进展");
-//        p.setFrontLineToxicityOfTolerance("无法耐受");
-        p.setFrontLineStatus(1);
-        p.setSecondLineStatus(0);
-        p.setThirdLineStatus(0);
+        p.setThirdLineStatus(1);
 
         //已用方案
-        p.setFrontLineTreatUsed("曲妥珠单抗+美坦新偶联物(T-DM1)");
+        p.setFrontLineTreatUsed("曲妥珠单抗+多西他赛");
+        p.setFrontLineTreatEvaluation("疾病进展");
+        p.setFrontLineStatus(1);
+        p.setSecondLineTreatUsed("曲妥珠单抗+美坦新偶联物(T-DM1)");
+        p.setSecondLineTreatEvaluation("疾病进展");
+        p.setSecondLineStatus(1);
+        p.setThirdLineTreatUsed("曲妥珠单抗+紫杉醇");
+        p.setThirdLineTreatEvaluation("疾病进展");
+        p.setThirdLineStatus(1);
 
         return p;
     }
@@ -90,8 +184,8 @@ public class BinvTest
         p.setHer2(1);
 
         //判断[随访（PAGE8）]所需参数
-        p.setPrimaryTumorStage("pT2");//原发肿瘤分期
-        p.setRegionalLymphNodesStage("pN0");//区域淋巴结分期
+        p.setpT("pT2");//原发肿瘤分期
+        p.setpN("pN0");//区域淋巴结分期
         p.setLymphaticMetastasis(0);//淋巴结转移灶个数
         p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
 
@@ -132,8 +226,8 @@ public class BinvTest
         p.setHer2(1);
 
         //判断[随访（PAGE8）]所需参数
-        p.setPrimaryTumorStage("pT2");//原发肿瘤分期
-        p.setRegionalLymphNodesStage("pN0");//区域淋巴结分期
+        p.setpT("pT2");//原发肿瘤分期
+        p.setpN("pN0");//区域淋巴结分期
         p.setLymphaticMetastasis(0);//淋巴结转移灶个数
         p.setPrimaryTumorSize(1.88f);//原发肿瘤大小
 
@@ -219,7 +313,8 @@ public class BinvTest
 //                System.out.println(event);
             }
         });
-        Patient patient = fifthCase();
+//        Patient patient = fourthCase();
+        Patient patient = sixthCase();
 //        Patient patient = fakeCase1();
 //        Patient patient = fakeCase2();
         kieSession.insert(patient);
